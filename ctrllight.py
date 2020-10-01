@@ -1,4 +1,4 @@
-from Adafruit_IO import Client, Feed
+from Adafruit_IO import Client, Feed,Data
 from telegram.ext import Updater,CommandHandler
 import os
 ADAFRUIT_IO_USERNAME =os.getenv('ADAFRUIT_IO_USERNAME')

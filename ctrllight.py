@@ -3,7 +3,7 @@ from telegram.ext import Updater,CommandHandler
 import os
 ADAFRUIT_IO_USERNAME =os.getenv('ADAFRUIT_IO_USERNAME')
 ADAFRUIT_IO_KEY =os.getenv('ADAFRUIT_IO_KEY')
-TELEGRAM_KEY=os.getnev('TELEGRAM_KEY')
+TELEGRAM_KEY=os.getenv('TELEGRAM_KEY')
 aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY')
 def cloudval(value):
   feed=aio.feeds('ctrllight')

@@ -21,7 +21,7 @@ def Off(bot,update):
   cloudval(0)
   
 
-u = Updater('TELEGRAM_TOKEN',use_context = True) 
+u = Updater('TELEGRAM_TOKEN') 
 dp = u.dispatcher
 dp.add_handler(CommandHandler('lighton',lighton))  
 dp.add_handler(CommandHandler('lightoff',lightoff))

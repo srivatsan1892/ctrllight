@@ -18,7 +18,7 @@ def On(bot, update):
   bot.send_photo(chat_id, photo='https://www.securityroundtable.org/wp-content/uploads/2019/03/AdobeStock_261504199-scaled.jpeg')
   valcloud(1)
 #function to switch off the light and send value '0' to adafruit
-def lightoff(bot, update):
+def Off(bot, update):
   chat_id = update.message.chat_id
   bot.send_message(chat_id, text="Lights OFF")
   bot.send_photo(chat_id=update.effective_chat.id,photo='https://ak.picdn.net/shutterstock/videos/1027638404/thumb/1.jpg?ip=x480')
@@ -26,7 +26,7 @@ def lightoff(bot, update):
 
 u = Updater('TELEGRAM_TOKEN',use_context = True) 
 dp = u.dispatcher
-dp.add_handler(CommandHandler('lighton',lighton))  # register a handler
-dp.add_handler(CommandHandler('lightoff',lightoff))
+dp.add_handler(CommandHandler('lighton',On))  # register a handler
+dp.add_handler(CommandHandler('lightoff',Off))
 u.start_polling()  # starts polling updates from Telegram
 u.idle() # blocks until one of the signals are received and stops the updater

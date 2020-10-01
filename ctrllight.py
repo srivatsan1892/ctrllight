@@ -5,7 +5,7 @@ import os   #operating system
 ADAFRUIT_IO_USERNAME = os.getenv('ADAFRUIT_IO_USERNAME')   # adafruit username and password should be given as 'Config Vars' in the settings of your app on Heroku 
 ADAFRUIT_IO_KEY = os.getenv('ADAFRUIT_IO_KEY')
 aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY') # create instance of REST client
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')  # similar to the adafruit username and password
+TELEGRAM= os.getenv('TELEGRAM')  # similar to the adafruit username and password
 
 # for displaying the /start command message so that the user knows what the bot does 
 def start(bot, update):
@@ -41,15 +41,9 @@ def given_message(bot, update):
   
   elif text == 'Turn off the Light':
     lightoff(bot,update)
-
-u = Updater('TELEGRAM_TOKEN',use_context = True) 
+u = Updater('TELEGRAM')
 dp = u.dispatcher
-dp.add_handler(CommandHandler('lighton',lighton))  # register a handler
-dp.add_handler(CommandHandler('lightoff',lightoff))
-dp.add_handler(CommandHandler('start', start))
-dp.add_handler(MessageHandler(Filters.command, unknown)) # Filters.command allows messages starting with a bot command
-dp.add_handler(MessageHandler(Filters.text, given_message)) # Filters.text allows text messages
-
-u.start_polling()  # starts polling updates from Telegram
-u.idle() # blocks until one of the signals are received and stops the updater
- 
+dp.add_handler(CommandHandler('lighton',On))
+dp.add_handler(CommandHandler('lightoff',Off))
+u.start_polling()
+u.idle()

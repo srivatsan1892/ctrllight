@@ -4,7 +4,7 @@ import os
 ADAFRUIT_IO_USERNAME =os.getenv('ADAFRUIT_IO_USERNAME')
 ADAFRUIT_IO_KEY =os.getenv('ADAFRUIT_IO_KEY')
 TELEGRAM_KEY=os.getnev('TELEGRAM_KEY')
-aio = Client(ADAFRUIT_IO_USERNAME,ADAFRUIT_IO_KEY)
+aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY')
 def cloudval(value):
   feed=aio.feeds('ctrllight')
   aio.send_data(feed.key,value)

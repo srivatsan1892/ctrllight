@@ -20,7 +20,7 @@ def Off(bot,update):
   bot.send_photo(chat_id,photo='https://images.app.goo.gl/BLFdTFJ9TsJ3okD49')
   cloudval(0)
 
-u = Updater('TELEGRAM_TOKEN')
+u = Updater('TELEGRAM_TOKEN',use_context=True)
 dp = u.dispatcher
 dp.add_handler(CommandHandler('lighton',On))
 dp.add_handler(CommandHandler('lightoff',Off))

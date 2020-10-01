@@ -23,8 +23,8 @@ def Off(bot,update):
 
 u = Updater('1191554053:AAGsZs6ntwJ6mziPYkcFEtI5LItsbjdzxLI') 
 dp = u.dispatcher
-dp.add_handler(CommandHandler('lighton',lighton))  
-dp.add_handler(CommandHandler('lightoff',lightoff))
+dp.add_handler(CommandHandler('lighton',On))  
+dp.add_handler(CommandHandler('lightoff',Off))
 
 u.start_polling() 
 u.idle()

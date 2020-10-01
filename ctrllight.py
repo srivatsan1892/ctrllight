@@ -19,10 +19,12 @@ def Off(bot,update):
   bot.send_message(chat_id, text="Lights OFF")
   bot.send_photo(chat_id,photo='https://images.app.goo.gl/BLFdTFJ9TsJ3okD49')
   cloudval(0)
+  
 
-u = Updater('TELEGRAM_TOKEN',use_context=True)
+u = Updater('TELEGRAM_TOKEN',use_context = True) 
 dp = u.dispatcher
-dp.add_handler(CommandHandler('lighton',On))
-dp.add_handler(CommandHandler('lightoff',Off))
-u.start_polling()
-u.idle()    
+dp.add_handler(CommandHandler('lighton',lighton))  
+dp.add_handler(CommandHandler('lightoff',lightoff))
+
+u.start_polling() 
+u.idle()

@@ -4,7 +4,7 @@ import os
 ADAFRUIT_IO_USERNAME =os.getenv('ADAFRUIT_IO_USERNAME')
 ADAFRUIT_IO_KEY =os.getenv('ADAFRUIT_IO_KEY')
 aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY')
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+
 
 def cloudval(value):
   feed=aio.feeds('ctrllight')
@@ -21,7 +21,7 @@ def Off(bot,update):
   cloudval(0)
   
 
-u = Updater('TELEGRAM_TOKEN') 
+u = Updater('1191554053:AAGsZs6ntwJ6mziPYkcFEtI5LItsbjdzxLI') 
 dp = u.dispatcher
 dp.add_handler(CommandHandler('lighton',lighton))  
 dp.add_handler(CommandHandler('lightoff',lightoff))

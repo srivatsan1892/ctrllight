@@ -24,9 +24,9 @@ def Off(bot, update):
   bot.send_photo(chat_id,photo='https://images.app.goo.gl/BLFdTFJ9TsJ3okD49') #Sending the image to the user showing that the lights are turned off
   value_send(0) # value is sent to the value_send function
 
-u = Updater(TELEGRAM)
-dp = u.dispatcher
-dp.add_handler(CommandHandler('lighton',On))
-dp.add_handler(CommandHandler('lightoff',Off))
+u = Updater(TELEGRAM) #the updater method is used to update the value
+dp = u.dispatcher #here the output is dipatched to the user
+dp.add_handler(CommandHandler('lighton',On))# command hadler to handle the command given by the user
+dp.add_handler(CommandHandler('lightoff',Off)) #command hadler to handle the command given by the user
 u.start_polling()
-u.idle() 
+u.idle() # idle fuction to keep everything idle if the input is not given

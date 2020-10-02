@@ -1,4 +1,4 @@
-from telegram.ext import Updater,CommandHandler,MessageHandler,Filters # import the required handlers from telegram.ext package
+from telegram.ext import Updater,CommandHandler # import the required handlers from telegram.ext package
 from Adafruit_IO import Client,Feed,Data   # import the libraries to create feeds and send data to it
 import os   #operating system
 
@@ -6,15 +6,6 @@ ADAFRUIT_IO_USERNAME = os.getenv('ADAFRUIT_IO_USERNAME')   # adafruit username a
 ADAFRUIT_IO_KEY = os.getenv('ADAFRUIT_IO_KEY')
 aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY') # create instance of REST client
 TELEGRAM= os.getenv('TELEGRAM')  # similar to the adafruit username and password
-
-# for displaying the /start command message so that the user knows what the bot does 
-def start(bot, update):
-    print(str( update.effective_chat.id ))
-    bot.send_message(chat_id = update.effective_chat.id, text="Welcome! Type 'Turn on the Light' or /lighton to switch on the light bulb. Type 'Turn off the Light' or /lightoff to switch off the light bulb.")
-# if the user types some unknown command
-def unknown(bot, update):
-    bot.send_message(chat_id=update.effective_chat.id, text="Oops, I didn't understand that. Try again!")
-
 # function to send values to adafruit.io
 def value_send(value):
   to_feed = aio.feeds('lightbotctrl') # put your own feed name here
@@ -32,18 +23,10 @@ def lightoff(bot, update):
   bot.send_message(chat_id, text="Light has been turned OFF")
   bot.send_photo(chat_id=update.effective_chat.id,photo='https://ak.picdn.net/shutterstock/videos/1027638404/thumb/1.jpg?ip=x480')
   value_send(0)
-# function to control the bot without giving commands
-def given_message(bot, update):
-  text = update.message.text.upper()
-  text = update.message.text
-  if text == 'Turn on the Light':
-    lighton(bot,update)
-  
-  elif text == 'Turn off the Light':
-    lightoff(bot,update)
+
 u = Updater('TELEGRAM')
 dp = u.dispatcher
-dp.add_handler(CommandHandler('lighton',On))
-dp.add_handler(CommandHandler('lightoff',Off))
+dp.add_handler(CommandHandler('lighton',lighton))
+dp.add_handler(CommandHandler('lightoff',lightoff))
 u.start_polling()
 u.idle() 

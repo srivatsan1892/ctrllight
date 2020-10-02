@@ -2,9 +2,9 @@ from telegram.ext import Updater,CommandHandler # import the required handlers f
 from Adafruit_IO import Client,Feed,Data   # import the libraries to create feeds and send data to it
 import os   #operating system
 
-ADAFRUIT_IO_USERNAME = os.getenv('ADAFRUIT_IO_USERNAME')   # adafruit username and password should be given as 'Config Vars' in the settings of your app on Heroku 
-ADAFRUIT_IO_KEY = os.getenv('ADAFRUIT_IO_KEY')
-aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY') # create instance of REST client
+x = os.getenv('ADAFRUIT_IO_USERNAME')   # adafruit username and password should be given as 'Config Vars' in the settings of your app on Heroku 
+y = os.getenv('ADAFRUIT_IO_KEY')
+aio = Client(x,y) # create instance of REST client
 TELEGRAM= os.getenv('TELEGRAM_TOKEN')  # similar to the adafruit username and password
 # function to send values to adafruit.io
 def value_send(value):
@@ -21,7 +21,7 @@ def lighton(bot, update):
 def lightoff(bot, update):
   chat_id = update.message.chat_id
   bot.send_message(chat_id, text="Light has been turned OFF")
-  bot.send_photo(chat_id=update.effective_chat.id,photo='https://ak.picdn.net/shutterstock/videos/1027638404/thumb/1.jpg?ip=x480')
+  bot.send_photo(chat_id,photo='https://ak.picdn.net/shutterstock/videos/1027638404/thumb/1.jpg?ip=x480')
   value_send(0)
 
 u = Updater(TELEGRAM)

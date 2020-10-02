@@ -1,32 +1,32 @@
-from telegram.ext import Updater,CommandHandler # import the required handlers from telegram.ext package
-from Adafruit_IO import Client,Feed,Data   # import the libraries to create feeds and send data to it
+from telegram.ext import Updater,CommandHandler # importing the required functions from telegram library of python
+from Adafruit_IO import Client,Feed,Data   # Importing the the required function from Adafruit library
 import os   #operating system
 
 x = os.getenv('ADAFRUIT_IO_USERNAME')   # adafruit username and password should be given as 'Config Vars' in the settings of your app on Heroku 
 y = os.getenv('ADAFRUIT_IO_KEY')
-aio = Client(x,y) # create instance of REST client
-TELEGRAM= os.getenv('TELEGRAM_TOKEN')  # similar to the adafruit username and password
+aio = Client(x,y) # Calling the username and the key into a single variable aio
+TELEGRAM= os.getenv('TELEGRAM_KEY')  # telegram bot key is fed to the variable telegram from which the input and output is recieved
 # function to send values to adafruit.io
 def value_send(value):
-  to_feed = aio.feeds('ctrllight') # put your own feed name here
-  aio.send_data(to_feed.key,value)  # append a new value to a feed
+  feed = aio.feeds('ctrllight') # feed crtllight is called from the above mentioned username
+  aio.send_data(feed.key,value)  # data value or updated value is sent to the adafruit server
 
-# function to switch on light and send value '1' to adafruit
-def lighton(bot, update):
-  chat_id = update.message.chat_id
-  bot.send_message(chat_id, text="Light has been turned ON")
-  bot.send_photo(chat_id, photo='https://www.securityroundtable.org/wp-content/uploads/2019/03/AdobeStock_261504199-scaled.jpeg')
-  value_send(1)
-#function to switch off the light and send value '0' to adafruit
-def lightoff(bot, update):
-  chat_id = update.message.chat_id
-  bot.send_message(chat_id, text="Light has been turned OFF")
-  bot.send_photo(chat_id,photo='https://ak.picdn.net/shutterstock/videos/1027638404/thumb/1.jpg?ip=x480')
-  value_send(0)
+# function when /lighton is sent via the bot
+def On(bot, update):
+  chat_id = update.message.chat_id #updating the particular chat id
+  bot.send_message(chat_id, text="Lights ON") #Sending message to the user that lights are switched on
+  bot.send_photo(chat_id, photo='https://images.app.goo.gl/EgmisKBLpz82bHqv6') #Sending a image to the user showing that the lights are on
+  value_send(1)# value sent to the value_send function
+#function when /lightoff is sent via the bot
+def Off(bot, update):
+  chat_id = update.message.chat_id #particular chat id id updated 
+  bot.send_message(chat_id, text="Lights OFF") # Returning message to the user tha lights are switched off
+  bot.send_photo(chat_id,photo='https://images.app.goo.gl/BLFdTFJ9TsJ3okD49') #Sending the image to the user showing that the lights are turned off
+  value_send(0) # value is sent to the value_send function
 
 u = Updater(TELEGRAM)
 dp = u.dispatcher
-dp.add_handler(CommandHandler('lighton',lighton))
-dp.add_handler(CommandHandler('lightoff',lightoff))
+dp.add_handler(CommandHandler('lighton',On))
+dp.add_handler(CommandHandler('lightoff',Off))
 u.start_polling()
 u.idle() 

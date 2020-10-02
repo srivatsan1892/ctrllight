@@ -8,7 +8,7 @@ aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY') # create instance of REST
 TELEGRAM= os.getenv('TELEGRAM_TOKEN')  # similar to the adafruit username and password
 # function to send values to adafruit.io
 def value_send(value):
-  to_feed = aio.feeds('lightbotctrl') # put your own feed name here
+  to_feed = aio.feeds('ctrllight') # put your own feed name here
   aio.send_data(to_feed.key,value)  # append a new value to a feed
 
 # function to switch on light and send value '1' to adafruit

@@ -5,7 +5,7 @@ import os   #operating system
 ADAFRUIT_IO_USERNAME = os.getenv('ADAFRUIT_IO_USERNAME')   # adafruit username and password should be given as 'Config Vars' in the settings of your app on Heroku 
 ADAFRUIT_IO_KEY = os.getenv('ADAFRUIT_IO_KEY')
 aio = Client('ADAFRUIT_IO_USERNAME','ADAFRUIT_IO_KEY') # create instance of REST client
-TELEGRAM= os.getenv('TELEGRAM')  # similar to the adafruit username and password
+TELEGRAM_TOKEN= os.getenv('TELEGRAM_TOKEN')  # similar to the adafruit username and password
 # function to send values to adafruit.io
 def value_send(value):
   to_feed = aio.feeds('lightbotctrl') # put your own feed name here
@@ -24,7 +24,7 @@ def lightoff(bot, update):
   bot.send_photo(chat_id=update.effective_chat.id,photo='https://ak.picdn.net/shutterstock/videos/1027638404/thumb/1.jpg?ip=x480')
   value_send(0)
 
-u = Updater('TELEGRAM')
+u = Updater('TELEGRAM_TOKEN')
 dp = u.dispatcher
 dp.add_handler(CommandHandler('lighton',lighton))
 dp.add_handler(CommandHandler('lightoff',lightoff))
